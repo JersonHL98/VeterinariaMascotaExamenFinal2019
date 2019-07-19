@@ -20,7 +20,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author LeguiA
+* @author Jerson
  */
 @ManagedBean
 @ViewScoped
@@ -31,9 +31,11 @@ public class MascotaPorClienteBean {
 
     private int idCliente;
     private int idMascota;
+    private Character estado;
+
     /*Estanciando las clases*/
     private Mascotaporcliente mascotaporcliente;
-    MascotaporclienteId mascotaporclienteid;
+    private MascotaporclienteId mascotaporclienteid;
 
     public MascotaPorClienteBean() {
         listaclientes = new ArrayList();
@@ -59,7 +61,7 @@ public class MascotaPorClienteBean {
 
         mascotaporcliente.setId(mascotaporclienteid);
         dao.guardarMascotaporcliente(mascotaporcliente);
-        return "/RegistroMascotaPorCliente";
+        return "/RegistroMascotaPorCliente.xhtml";
 
     }
 
@@ -101,6 +103,22 @@ public class MascotaPorClienteBean {
 
     public void setMascotaporcliente(Mascotaporcliente mascotaporcliente) {
         this.mascotaporcliente = mascotaporcliente;
+    }
+
+    public MascotaporclienteId getMascotaporclienteid() {
+        return mascotaporclienteid;
+    }
+
+    public void setMascotaporclienteid(MascotaporclienteId mascotaporclienteid) {
+        this.mascotaporclienteid = mascotaporclienteid;
+    }
+
+    public Character getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Character estado) {
+        this.estado = estado;
     }
 
 }

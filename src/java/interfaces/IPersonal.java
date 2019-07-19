@@ -11,7 +11,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author LeguiA
+* @author Jerson
  */
 public interface IPersonal {
 

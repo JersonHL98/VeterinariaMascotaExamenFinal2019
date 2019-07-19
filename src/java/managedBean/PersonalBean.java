@@ -15,7 +15,7 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author LeguiA
+* @author Jerson
  */
 @ManagedBean
 @ViewScoped

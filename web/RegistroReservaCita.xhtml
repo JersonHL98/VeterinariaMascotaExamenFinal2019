@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>REGISTRO RESERVA CITA</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./TemplateVeterinaria.xhtml">
+            <ui:define name="content">
+                <p:growl id="msj" autoUpdate="true"/>
+                <div align="center">
+                    <h:form id="fromReservacista">
+                        <p:panel style="width:60%">
+                            <f:facet name="header">
+                                <p:column>
+                                    <p:outputLabel value ="Registro de Reservas Citas"/>
+                                </p:column>
+                            </f:facet>
+                            <p:panelGrid style="width:100% ">
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="ID"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText value="#{reservacistaBean.reservacista.idReservaCista}" required="true"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Fecha"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:calendar locale="es" value="#{reservacistaBean.reservacista.fecha}" pattern="dd/MM/yyyy" mask="true" required="true"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Cliente"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{reservacistaBean.idCliente}">
+                                            <f:selectItem itemLabel="--Seleccione un cliente--"/>
+                                            <f:selectItems value="#{reservacistaBean.listarCliente}" var="Cliente" itemLabel="#{Cliente.nombre}" itemValue="#{Cliente.idCliente}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Tipo Reserva"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{reservacistaBean.idTipoReserva}">
+                                            <f:selectItem itemLabel="--Seleccione un Reserva--"/>
+                                            <f:selectItems value="#{reservacistaBean.listarTipoReserva}" var="TipoReserva" itemLabel="#{TipoReserva.descripcion}" itemValue="#{TipoReserva.idTipoReserva}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Usuario"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{reservacistaBean.idUsuario}">
+                                            <f:selectItem itemLabel="--Seleccione un Usuario--"/>
+                                            <f:selectItems value="#{reservacistaBean.listarUsuario}" var="Usuario" itemLabel="#{Usuario.nombreUsuario}" itemValue="#{Usuario.idUsuario}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                            <p:commandButton value="Nuevo" action="#{reservacistaBean.limpiar()}" update=":fromReservacista"/>
+                            <p:commandButton rendered="#{!reservacistaBean.banderaSelect}" value="Registrar" action="#{reservacistaBean.guardar()}" update=":formData:dataTable,:fromReservacista"/>
+                            <p:commandButton rendered="#{reservacistaBean.banderaSelect}" value="Actualizar" action="#{reservacistaBean.actualizarReservacista()}" update=":formData:dataTable,:fromReservacista"/>
+                        </p:panel>
+                    </h:form>
+                    <h:form id="formData">
+                        <p:dataTable rowKey="#{reservacista.idReservaCista}" selection="#{reservacista.idReservaCista}" selectionMode="single" id="dataTable" var="reservacista" value="#{reservacistaBean.listarReservacista()}">
+                            <p:ajax event="rowSelect" update=":fromReservacista" listener="#{reservacistaBean.selectBandera()}"/>
+                            <p:column headerText="Codigo">
+                                <p:outputLabel value="#{reservacista.idReservaCista}"/>
+                            </p:column>
+                            <p:column headerText="Fecha">
+                                <p:outputLabel value="#{reservacista.fecha}"/>
+                            </p:column>
+                           
+                            <p:column headerText="Cliente">
+                                <p:outputLabel value="#{reservacistaBean.cliente.idCliente}"/>
+                            </p:column>
+                            <p:column headerText="Tipo Reserva">
+                                <p:outputLabel value="#{reservacistaBean.tiporeserva.idTipoReserva}"/>
+                            </p:column>
+                            <p:column headerText="Usuario">
+                                <p:outputLabel value="#{reservacistaBean.usuario.idUsuario}"/>
+                            </p:column>
+                          
+                            
+                            <p:column>
+                                <p:commandButton value="ELIMINAR" action="#{reservacistaBean.eliminarReservacista()}" update=":formData:dataTable,:fromReservacista"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

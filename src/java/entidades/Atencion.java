@@ -1,5 +1,5 @@
 package entidades;
-// Generated 14/07/2019 06:45:13 PM by Hibernate Tools 4.3.1
+// Generated 19/07/2019 08:31:04 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,21 +12,23 @@ public class Atencion  implements java.io.Serializable {
 
      private int idAtencion;
      private Mascotaporcliente mascotaporcliente;
-     private Personal personal;
      private String fechaAtencion;
      private String diagnostico;
      private Date horaAtencion;
+     private int idPersonal;
+     private int idTipoAtencion;
 
     public Atencion() {
     }
 
-    public Atencion(int idAtencion, Mascotaporcliente mascotaporcliente, Personal personal, String fechaAtencion, String diagnostico, Date horaAtencion) {
+    public Atencion(int idAtencion, Mascotaporcliente mascotaporcliente, String fechaAtencion, String diagnostico, Date horaAtencion, int idPersonal, int idTipoAtencion) {
        this.idAtencion = idAtencion;
        this.mascotaporcliente = mascotaporcliente;
-       this.personal = personal;
        this.fechaAtencion = fechaAtencion;
        this.diagnostico = diagnostico;
        this.horaAtencion = horaAtencion;
+       this.idPersonal = idPersonal;
+       this.idTipoAtencion = idTipoAtencion;
     }
    
     public int getIdAtencion() {
@@ -42,13 +44,6 @@ public class Atencion  implements java.io.Serializable {
     
     public void setMascotaporcliente(Mascotaporcliente mascotaporcliente) {
         this.mascotaporcliente = mascotaporcliente;
-    }
-    public Personal getPersonal() {
-        return this.personal;
-    }
-    
-    public void setPersonal(Personal personal) {
-        this.personal = personal;
     }
     public String getFechaAtencion() {
         return this.fechaAtencion;
@@ -70,6 +65,20 @@ public class Atencion  implements java.io.Serializable {
     
     public void setHoraAtencion(Date horaAtencion) {
         this.horaAtencion = horaAtencion;
+    }
+    public int getIdPersonal() {
+        return this.idPersonal;
+    }
+    
+    public void setIdPersonal(int idPersonal) {
+        this.idPersonal = idPersonal;
+    }
+    public int getIdTipoAtencion() {
+        return this.idTipoAtencion;
+    }
+    
+    public void setIdTipoAtencion(int idTipoAtencion) {
+        this.idTipoAtencion = idTipoAtencion;
     }
 
 

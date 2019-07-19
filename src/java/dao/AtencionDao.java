@@ -5,8 +5,8 @@
  */
 package dao;
 
-import entidades.Vacuna;
-import interfaces.IVacuna;
+import entidades.Atencion;
+import interfaces.IAtencion;
 import java.util.ArrayList;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,20 +15,20 @@ import utilitarios.HibernateUtil;
 
 /**
  *
- * @author LeguiA
+* @author Jerson
  */
-public class VacunaDao implements IVacuna {
+public class AtencionDao implements IAtencion {
 
     @Override
-    public boolean guardarVacuna(Vacuna vacuna) {
+    public boolean guardarAtencion(Atencion atencion) {
         //Construir una nueva session y una nueva transaccion
         boolean respuesta = true;
         Session sesion = HibernateUtil.getSessionFactory().openSession();
         Transaction transaccion = sesion.beginTransaction();
 
-        //Registrar en la base de datos la vacuna
+        //Registrar en la base de datos la atencion
         try {
-            sesion.save(vacuna);
+            sesion.save(atencion);
             transaccion.commit();
         } catch (Exception e) {
             respuesta = false;
@@ -38,26 +38,26 @@ public class VacunaDao implements IVacuna {
     }
 
     @Override
-    public ArrayList<Vacuna> listarVacunas() {
+    public ArrayList<Atencion> listarAtencion() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        ArrayList<Vacuna> milista = new ArrayList<>();
+        ArrayList<Atencion> milista = new ArrayList<>();
         //Crear la consulta hacia la base de datos
-        Query query = session.createQuery("FROM Vacuna");
+        Query query = session.createQuery("FROM Atencion");
 
         //Ejecutar la consulta y obtener la lista
-        milista = (ArrayList<Vacuna>) query.list();
+        milista = (ArrayList<Atencion>) query.list();
         session.close();
         return milista;
 
     }
 
     @Override
-    public boolean actualizarVacuna(Vacuna vacuna) {
+    public boolean actualizarAtencion(Atencion atencion) {
         boolean respuesta = true;
         Session sesion = HibernateUtil.getSessionFactory().openSession();
         Transaction transaccion = sesion.beginTransaction();
         try {
-            sesion.update(vacuna);
+            sesion.update(atencion);
             transaccion.commit();
         } catch (Exception e) {
             respuesta = false;
@@ -67,32 +67,8 @@ public class VacunaDao implements IVacuna {
     }
 
     @Override
-    public ArrayList<Vacuna> listPastor(Session sesion) {
-        ArrayList<Vacuna> milista = new ArrayList<>();
-        //Crear la consulta hacia la base de datos
-        Query query = sesion.createQuery("FROM Vacuna where raza ='pastor aleman'");
-
-        //Ejecutar la consulta y obtener la lista
-        milista = (ArrayList<Vacuna>) query.list();
-        sesion.close();
-        return milista;
-    }
-
-    @Override
-    public ArrayList<Vacuna> listSANDOR(Session sesion) {
-        ArrayList<Vacuna> milista = new ArrayList<>();
-        //Crear la consulta hacia la base de datos
-        Query query = sesion.createQuery("FROM Vacuna where nombreVacuna ='sandor'");
-
-        //Ejecutar la consulta y obtener la lista
-        milista = (ArrayList<Vacuna>) query.list();
-        return milista;
-
-    }
-
-    @Override
     public Integer listCount(Session sesion) {
-        String sql = "select count(*) From Vacuna";
+        String sql = "select count(*) From Atencion";
         Query query = sesion.createQuery(sql);
         Long long1 = (Long) query.uniqueResult();
         Integer count = long1.intValue();
@@ -101,13 +77,13 @@ public class VacunaDao implements IVacuna {
     }
 
     @Override
-    public boolean eliminarVacuna(Vacuna vacuna) {
+    public boolean eliminarAtencion(Atencion atencion) {
 
         boolean respuesta = true;
         Session sesion = HibernateUtil.getSessionFactory().openSession();
         Transaction transaccion = sesion.beginTransaction();
         try {
-            sesion.delete(vacuna);
+            sesion.delete(atencion);
             transaccion.commit();
             respuesta = true;
         } catch (Exception e) {

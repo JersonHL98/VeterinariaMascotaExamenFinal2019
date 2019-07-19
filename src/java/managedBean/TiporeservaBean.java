@@ -5,14 +5,13 @@
  */
 package managedBean;
 
-import dao.MascotaDao;
-import entidades.Mascota;
+import dao.TiporeservaDao;
+import entidades.Tiporeserva;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import org.hibernate.Session;
 
 /**
  *
@@ -20,27 +19,27 @@ import org.hibernate.Session;
  */
 @ManagedBean
 @ViewScoped
-public class MascotaBean {
+public class TiporeservaBean {
 
-    private Mascota mascota;
+    private Tiporeserva tiporeserva;
     private boolean banderaSelect;
 
-    public Mascota getMascota() {
-        return mascota;
+    public Tiporeserva getTiporeserva() {
+        return tiporeserva;
     }
 
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
+    public void setTiporeserva(Tiporeserva tiporeserva) {
+        this.tiporeserva = tiporeserva;
     }
 
-    public MascotaBean() {
-        this.mascota = new Mascota();
+    public TiporeservaBean() {
+        this.tiporeserva = new Tiporeserva();
     }
 
-    public String guardarMascota() {
+    public String guardarTiporeserva() {
 
-        MascotaDao dao = new MascotaDao();
-        boolean respuesta = dao.guardarMascota(mascota);
+        TiporeservaDao dao = new TiporeservaDao();
+        boolean respuesta = dao.guardarTiporeserva(tiporeserva);
 
         if (respuesta) {
 
@@ -48,46 +47,43 @@ public class MascotaBean {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo registrar"));
         }
-        return "/RegistroMascota.xhtml";
+        return "/RegistroTiporeserva.xhtml";
     }
 
-    public String actualizarMascota() {
-        MascotaDao dao = new MascotaDao();
-        boolean respuesta = dao.actualizarMascota(mascota);
+    public String actualizarTiporeserva() {
+        TiporeservaDao dao = new TiporeservaDao();
+        boolean respuesta = dao.actualizarTiporeserva(tiporeserva);
         if (respuesta) {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Correcto", "Registro actualizo con exito"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo actualizar"));
         }
-
-        return "/RegistroMascota.xhtml";
+        return "/RegistroTiporeserva.xhtml";
     }
 
-    public ArrayList<Mascota> listarMascotas() {
-        ArrayList<Mascota> milista = new ArrayList<>();
-        MascotaDao dao = new MascotaDao();
-        milista = dao.listarMascotas();
+    public ArrayList<Tiporeserva> listarTiporeserva() {
+        ArrayList<Tiporeserva> milista = new ArrayList<>();
+        TiporeservaDao dao = new TiporeservaDao();
+        milista = dao.listarTiporeserva();
 
         return milista;
     }
 
     public String limpiar() {
-        return "/RegistroMascota.xhtml";
+        return "/TipoAtencion.xhtml";
     }
 
-    public String eliminarMascota() {
-        MascotaDao dao = new MascotaDao();
-        boolean respuesta = dao.eliminarMascota(mascota);
-        System.out.println(respuesta);
+    public String eliminarTiporeserva() {
+        TiporeservaDao dao = new TiporeservaDao();
+        boolean respuesta = dao.eliminarTiporeserva(tiporeserva);
         if (respuesta) {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Correcto", "Registro Borrado con exito"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo eliminar"));
         }
-
-        return "/RegistroMascota.xhtml";
+        return "/RegistroTiporeserva.xhtml";
     }
 
     public void selectBandera() {

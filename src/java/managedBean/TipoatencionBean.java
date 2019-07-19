@@ -5,8 +5,8 @@
  */
 package managedBean;
 
-import dao.VacunaDao;
-import entidades.Vacuna;
+import dao.TipoatencionDao;
+import entidades.Tipoatencion;
 import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,31 +15,31 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author LeguiA
+* @author Jerson
  */
 @ManagedBean
 @ViewScoped
-public class VacunaBean {
+public class TipoatencionBean {
 
-    private Vacuna vacuna;
+    private Tipoatencion tipoatencion;
     private boolean banderaSelect;
 
-    public Vacuna getVacuna() {
-        return vacuna;
+    public Tipoatencion getTipoatencion() {
+        return tipoatencion;
     }
 
-    public void setVacuna(Vacuna vacuna) {
-        this.vacuna = vacuna;
+    public void setTipoatencion(Tipoatencion tipoatencion) {
+        this.tipoatencion = tipoatencion;
     }
 
-    public VacunaBean() {
-        this.vacuna = new Vacuna();
+    public TipoatencionBean() {
+        this.tipoatencion = new Tipoatencion();
     }
 
-    public String guardarVacuna() {
+    public String guardarTipoatencion() {
 
-        VacunaDao dao = new VacunaDao();
-        boolean respuesta = dao.guardarVacuna(vacuna);
+        TipoatencionDao dao = new TipoatencionDao();
+        boolean respuesta = dao.guardarTipoatencion(tipoatencion);
 
         if (respuesta) {
 
@@ -47,43 +47,43 @@ public class VacunaBean {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo registrar"));
         }
-        return "/RegistroVacuna.xhtml";
+        return "/RegistroTipoAtencion.xhtml";
     }
 
-    public String actualizarVacuna() {
-        VacunaDao dao = new VacunaDao();
-        boolean respuesta = dao.actualizarVacuna(vacuna);
+    public String actualizarTipoatencion() {
+        TipoatencionDao dao = new TipoatencionDao();
+        boolean respuesta = dao.actualizarTipoatencion(tipoatencion);
         if (respuesta) {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Correcto", "Registro actualizo con exito"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo actualizar"));
         }
-        return "/RegistroVacuna.xhtml";
+        return "/RegistroTipoAtencion.xhtml";
     }
 
-    public ArrayList<Vacuna> listarVacunas() {
-        ArrayList<Vacuna> milista = new ArrayList<>();
-        VacunaDao dao = new VacunaDao();
-        milista = dao.listarVacunas();
+    public ArrayList<Tipoatencion> listarTipoatencion() {
+        ArrayList<Tipoatencion> milista = new ArrayList<>();
+        TipoatencionDao dao = new TipoatencionDao();
+        milista = dao.listarTipoatencion();
 
         return milista;
     }
 
     public String limpiar() {
-        return "/RegistroVacuna.xhtml";
+        return "/RegistroTipoAtencion.xhtml";
     }
 
-    public String eliminarVacuna() {
-        VacunaDao dao = new VacunaDao();
-        boolean respuesta = dao.eliminarVacuna(vacuna);
+    public String eliminarTipoatencion() {
+        TipoatencionDao dao = new TipoatencionDao();
+        boolean respuesta = dao.eliminarTipoatencion(tipoatencion);
         if (respuesta) {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Correcto", "Registro Borrado con exito"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "No se pudo eliminar"));
         }
-        return "/RegistroVacuna.xhtml";
+        return "/RegistroTipoAtencion.xhtml";
     }
 
     public void selectBandera() {

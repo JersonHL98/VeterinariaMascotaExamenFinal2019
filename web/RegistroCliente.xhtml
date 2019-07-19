@@ -13,13 +13,13 @@
                 <p:growl id="msj" autoUpdate="true"/>
                 <div align="center">
                     <h:form id="formCliente">
-                        <p:panel style="width:40">
+                        <p:panel style="width:60">
                             <f:facet name="header">
                                 <p:column>
                                     <p:outputLabel value ="Registro Cliente"/>
                                 </p:column>
                             </f:facet>
-                            <p:panelGrid style="width:40 ">
+                            <p:panelGrid style="width:100 ">
                                 <p:row>
                                     <p:column>
                                         <p:outputLabel value="ID"/>
@@ -84,7 +84,6 @@
                     </h:form>
 
                     <h:form id="formData">
-
                         <p:dataTable rowKey="#{cliente.idCliente}" selection="#{clienteBean.cliente}" selectionMode="single" id="dataTable" var="cliente" value="#{clienteBean.listarClientes()}">
                             <p:ajax event="rowSelect" update=":formCliente"/>
                             <p:column headerText="Codigo">
